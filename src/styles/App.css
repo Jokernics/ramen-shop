@@ -1,0 +1,22 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+#root {
+  display: flex;
+  justify-content: center;
+}
+
+.App {
+  
+  width: 800px;
+
+}
+
+.post {
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
+}

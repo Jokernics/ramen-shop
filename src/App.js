@@ -1,24 +1,31 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useContext } from 'react';
+import {BrowserRouter, Navigate, Route, Routes} from 'react-router-dom';
+import { AuthContext } from './context/AuthContext';
+import Admin from './pages/Admin';
+import Login from './pages/Login';
+import Main from './pages/Main';
+import './styles/App.css';
+
+
 
 function App() {
+  const { currentUser } = useContext(AuthContext)
+
+
+  const RequireAuth = ({ children }) => {
+    return currentUser ? (children) : <Navigate to="/login" />
+  }
+
+  
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path='/admin' element={<RequireAuth><Admin/></RequireAuth>}></Route>
+        <Route path='/login' element={<Login/>} />
+        <Route path='/main' element={<Main/>} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 
